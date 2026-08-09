@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <meta name="theme-color" content="#17231d" />
+    <title>荒原余烬 - 离线生存游戏</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main id="game-shell" aria-label="荒原余烬游戏">
+      <canvas id="game" aria-label="游戏画面"></canvas>
+
+      <section id="hud" class="hud hidden" aria-label="游戏状态">
+        <div class="hud-top">
+          <div class="stat time-stat">
+            <span class="stat-label">生存</span>
+            <strong id="time">00:00</strong>
+          </div>
+          <div class="level-group">
+            <div class="level-row">
+              <strong id="level">等级 1</strong>
+              <span id="wave">威胁 1</span>
+            </div>
+            <div class="xp-track" aria-label="经验值">
+              <div id="xp-fill" class="xp-fill"></div>
+            </div>
+          </div>
+          <div class="hud-actions">
+            <div class="coin-stat" title="余烬数量"><span class="coin-dot"></span><strong id="coins">0</strong></div>
+            <button id="pause-btn" class="icon-btn" type="button" title="暂停游戏" aria-label="暂停游戏">Ⅱ</button>
+          </div>
+        </div>
+        <div class="weapon-slots" id="weapon-slots" aria-label="当前强化"></div>
+        <div class="talent-slots" id="talent-slots" aria-label="职业天赋"></div>
+        <div class="boss-wrap hidden" id="boss-wrap">
+          <span>荒原守望者</span>
+          <div class="boss-track"><div id="boss-fill"></div></div>
+        </div>
+      </section>
+
+      <section id="start-screen" class="screen active">
+        <div class="start-content">
+          <p class="eyebrow">无尽荒原 · 完全离线</p>
+          <h1>荒原余烬</h1>
+          <p class="subtitle">选择英雄，带着专属武器踏入永不止息的怪潮。</p>
+          <div class="profile-bar"><span>远征金币</span><strong><i class="coin-dot"></i><b id="bank-coins">0</b></strong></div>
+          <div id="character-roster" class="character-roster" aria-label="选择英雄"></div>
+          <div class="character-detail">
+            <div>
+              <span id="character-weapon" class="character-weapon">余烬剑</span>
+              <strong id="character-name">守火者</strong>
+              <small id="character-perk">生命坚韧，擅长近身清场。</small>
+            </div>
+            <div class="mastery">
+              <span>精通</span>
+              <div id="mastery-pips" class="mastery-pips"></div>
+            </div>
+            <button id="mastery-btn" class="mastery-btn" type="button">强化</button>
+          </div>
+          <section class="meta-shop" aria-label="局外金币商店">
+            <div class="meta-shop-heading">
+              <strong>远征补给</strong>
+              <small>永久生效 · 仅使用游戏内金币</small>
+            </div>
+            <div id="meta-shop-items" class="meta-shop-items"></div>
+          </section>
+          <button id="start-btn" class="primary-btn" type="button">
+            <span>开始远征</span>
+          </button>
+          <div id="record" class="record"></div>
+        </div>
+        <div class="start-vignette"></div>
+      </section>
+
+      <section id="level-screen" class="screen upgrade-screen" aria-label="选择强化">
+        <div class="panel-title">
+          <p>余烬回应了你</p>
+          <h2>选择一项强化</h2>
+        </div>
+        <div id="upgrade-cards" class="upgrade-cards"></div>
+        <div id="upgrade-actions" class="upgrade-actions hidden" aria-label="金币强化选项">
+          <button id="reroll-upgrades-btn" class="upgrade-action-btn" type="button"><span>↻ 重抽</span><small>● 6</small></button>
+          <button id="buy-extra-upgrade-btn" class="upgrade-action-btn emphasized" type="button"><span>＋ 额外强化</span><small>● 18</small></button>
+          <button id="banish-upgrade-btn" class="upgrade-action-btn" type="button"><span>⊘ 放逐</span><small>● 10</small></button>
+          <button id="skip-upgrade-btn" class="upgrade-action-btn" type="button"><span>跳过</span><small>回血 + 金币</small></button>
+        </div>
+      </section>
+
+      <section id="pause-screen" class="screen compact-screen" aria-label="游戏暂停">
+        <div class="modal-panel">
+          <p class="eyebrow">旅途暂歇</p>
+          <h2>已暂停</h2>
+          <button id="resume-btn" class="primary-btn" type="button">继续游戏</button>
+          <button id="restart-pause-btn" class="secondary-btn" type="button">重新开始</button>
+        </div>
+      </section>
+
+      <section id="end-screen" class="screen compact-screen" aria-label="游戏结束">
+        <div class="modal-panel end-panel">
+          <p id="end-kicker" class="eyebrow">余烬熄灭</p>
+          <h2 id="end-title">你倒在了荒原</h2>
+          <div class="result-grid">
+            <div><strong id="result-time">00:00</strong><span>生存时间</span></div>
+            <div><strong id="result-level">1</strong><span>最终等级</span></div>
+            <div><strong id="result-kills">0</strong><span>击败敌人</span></div>
+            <div><strong id="result-coins">0</strong><span>带回金币</span></div>
+          </div>
+          <button id="revive-btn" class="revive-btn hidden" type="button">金币复活</button>
+          <button id="restart-btn" class="primary-btn" type="button">再来一局</button>
+          <button id="home-btn" class="secondary-btn" type="button">返回标题</button>
+        </div>
+      </section>
+
+      <div id="touch-zone" class="touch-zone hidden" aria-hidden="true">
+        <div id="joystick-base" class="joystick-base"><div id="joystick-knob" class="joystick-knob"></div></div>
+      </div>
+    </main>
+    <script src="game.js"></script>
+  </body>
+</html>
