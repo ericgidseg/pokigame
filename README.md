@@ -31,14 +31,16 @@ window.__emberPerf.fillEnemies(180) // 填充敌人，用于稳定压力测试
 
 ## Windows 桌面版
 
-项目使用 Neutralinojs 封装，运行时比 Electron 小很多。安装 Node.js 后执行：
+默认构建使用 Tauri/WebView2 生成一份 32 位 x86 Windows 程序。它可在 32 位 Windows 原生运行，在 64 位 Windows 通过 WoW64 运行，在 Windows ARM64 通过系统 x86 模拟层运行，因此只需要发布一个 EXE。安装 Node.js、Rust、cargo-xwin 和 LLVM 后执行：
 
 ```bash
 npm install
 npm run desktop:win
 ```
 
-构建结果为 `dist/emberlands-win-x64.exe`，这是可直接运行的 Windows x64 单文件版本，不需要 Python 或本地服务器。桌面窗口标题为 `Emberlands`。构建脚本会自动删除其他平台产物以减小交付目录。Windows 版本使用系统 WebView2；Windows 10/11 通常已经预装，若系统没有 WebView2 Runtime，需要先安装一次微软 WebView2 Runtime。
+构建结果为 `dist/Emberlands.exe`，这是可直接运行的兼容单文件版本，不需要 Python 或本地服务器。桌面窗口标题为 `Emberlands`。Windows 版本使用系统 WebView2；Windows 10/11 通常已经预装，若系统没有 WebView2 Runtime，需要先安装一次微软 WebView2 Runtime。
+
+如果只需要体积更小的 Windows x64 专用版本，可以执行 `npm run desktop:win-x64-light`。
 
 ## 操作
 
