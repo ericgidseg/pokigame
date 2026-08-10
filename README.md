@@ -29,6 +29,17 @@ window.__emberPerf.fillEnemies(180) // 填充敌人，用于稳定压力测试
 
 普通游戏地址不会启用采样逻辑。
 
+## Windows 桌面版
+
+项目使用 Neutralinojs 封装，运行时比 Electron 小很多。安装 Node.js 后执行：
+
+```bash
+npm install
+npm run desktop:win
+```
+
+构建结果为 `dist/荒原余烬-win-x64.exe`，这是可直接运行的 Windows x64 单文件版本，不需要 Python 或本地服务器。构建脚本会自动删除其他平台产物以减小交付目录。Windows 版本使用系统 WebView2；Windows 10/11 通常已经预装，若系统没有 WebView2 Runtime，需要先安装一次微软 WebView2 Runtime。
+
 ## 操作
 
 - `WASD` / 方向键：移动
