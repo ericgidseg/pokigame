@@ -4,6 +4,7 @@
   "private": true,
   "description": "荒原余烬离线无尽生存游戏",
   "scripts": {
+    "web:single": "node scripts/build-single-html.cjs",
     "desktop:sync": "node scripts/sync-desktop.cjs",
     "desktop:win": "npm run desktop:sync && node scripts/build-compatible-windows.cjs",
     "desktop:win-x64-light": "npm run desktop:sync && neu update && neu build --release --embed-resources --clean --config-file neutralino.config.json && node scripts/keep-windows-build.cjs"

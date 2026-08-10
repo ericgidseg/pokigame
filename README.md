@@ -29,6 +29,16 @@ window.__emberPerf.fillEnemies(180) // 填充敌人，用于稳定压力测试
 
 普通游戏地址不会启用采样逻辑。
 
+## 单文件离线版
+
+执行以下命令可把 HTML、CSS 和 JavaScript 合并为一个完全自包含的网页文件：
+
+```bash
+npm run web:single
+```
+
+构建结果为 `dist/Emberlands.html`。用户下载后直接双击即可通过 Edge、Chrome 或 Firefox 离线运行，不区分 Windows x86、x64 或 ARM64，也不需要安装 Node.js、Python 或 WebView2 Runtime。
+
 ## Windows 桌面版
 
 默认构建使用 Tauri/WebView2 生成一份 32 位 x86 Windows 程序。它可在 32 位 Windows 原生运行，在 64 位 Windows 通过 WoW64 运行，在 Windows ARM64 通过系统 x86 模拟层运行，因此只需要发布一个 EXE。安装 Node.js、Rust、cargo-xwin 和 LLVM 后执行：
